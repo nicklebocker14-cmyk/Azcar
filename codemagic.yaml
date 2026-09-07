@@ -13,6 +13,9 @@ workflows:
       - name: Build Android
         script: |
           chmod +x gradlew
+          if [ -f debug.keystore.base64 ]; then
+            base64 -d debug.keystore.base64 > debug.keystore
+          fi
           ./gradlew assembleDebug
     artifacts:
       - app/build/outputs/**/*.apk
